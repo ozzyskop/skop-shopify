@@ -48,7 +48,17 @@ skop-shopify/
 ├── .github/
 │   └── workflows/
 │       └── theme-ci.yml
+├── assets/
+│   ├── skop-base.css
+│   ├── skop-bundle-builder.js
+│   ├── skop-formula-finder.js
+│   ├── skop-formula-rules.json
+│   ├── skop-mark.svg
+│   ├── skop-tokens.css
+│   └── skop-wordmark.svg
 ├── config/
+│   ├── settings_data.json
+│   ├── settings_schema.json
 │   ├── shopify-custom-data.yml
 │   └── tracking-plan.yml
 ├── docs/
@@ -75,44 +85,32 @@ skop-shopify/
 │       ├── custom-data.test.js
 │       ├── formula-finder.test.js
 │       └── tracking-plan.test.js
-├── theme/
-│   ├── assets/
-│   │   ├── skop-base.css
-│   │   ├── skop-bundle-builder.js
-│   │   ├── skop-formula-finder.js
-│   │   ├── skop-formula-rules.json
-│   │   ├── skop-mark.svg
-│   │   ├── skop-tokens.css
-│   │   └── skop-wordmark.svg
-│   ├── config/
-│   │   ├── settings_data.json
-│   │   └── settings_schema.json
-│   ├── layout/
-│   │   └── theme.liquid
-│   ├── locales/
-│   │   └── en.default.json
-│   ├── sections/
-│   │   ├── skop-evidence-grid.liquid
-│   │   ├── skop-bundle-builder.liquid
-│   │   ├── skop-formula-family-grid.liquid
-│   │   ├── skop-formula-finder.liquid
-│   │   ├── skop-hero.liquid
-│   │   ├── skop-proof-bar.liquid
-│   │   ├── skop-product-evidence.liquid
-│   │   ├── skop-product-main.liquid
-│   │   ├── skop-wholesale-application.liquid
-│   │   └── skop-wholesale-cta.liquid
-│   ├── snippets/
-│   │   ├── skop-formula-badge.liquid
-│   │   ├── skop-formula-card.liquid
-│   │   ├── skop-proof-item.liquid
-│   │   └── skop-purchase-selector.liquid
-│   └── templates/
-│       ├── index.json
-│       ├── page.formula-finder.json
-│       ├── page.results.json
-│       ├── page.wholesale.json
-│       └── product.skop.json
+├── layout/
+│   └── theme.liquid
+├── locales/
+│   └── en.default.json
+├── sections/
+│   ├── skop-evidence-grid.liquid
+│   ├── skop-bundle-builder.liquid
+│   ├── skop-formula-family-grid.liquid
+│   ├── skop-formula-finder.liquid
+│   ├── skop-hero.liquid
+│   ├── skop-proof-bar.liquid
+│   ├── skop-product-evidence.liquid
+│   ├── skop-product-main.liquid
+│   ├── skop-wholesale-application.liquid
+│   └── skop-wholesale-cta.liquid
+├── snippets/
+│   ├── skop-formula-badge.liquid
+│   ├── skop-formula-card.liquid
+│   ├── skop-proof-item.liquid
+│   └── skop-purchase-selector.liquid
+├── templates/
+│   ├── index.json
+│   ├── page.formula-finder.json
+│   ├── page.results.json
+│   ├── page.wholesale.json
+│   └── product.skop.json
 ├── .gitignore
 ├── .prettierrc.json
 ├── package-lock.json
@@ -166,7 +164,7 @@ No task bypasses these gates.
 - Create: `vitest.config.js`
 - Create: `playwright.config.js`
 - Create: `.github/workflows/theme-ci.yml`
-- Create or pull: `theme/**`
+- Create or pull: `assets/**`, `config/**`, `layout/**`, `locales/**`, `sections/**`, `snippets/**`, and `templates/**`
 - Test: `tests/e2e/homepage.spec.js`
 
 **Interfaces:**
@@ -199,7 +197,7 @@ Expected: All implementation files and commits live under `skop-shopify/`, isola
   "scripts": {
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "theme:check": "cd theme && shopify theme check",
+    "theme:check": "shopify theme check --path .",
     "test:unit": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
@@ -284,10 +282,11 @@ Expected: `package-lock.json` is created, the Chromium test browser is installed
 Run:
 
 ```bash
-npx shopify theme init theme --clone-url https://github.com/Shopify/dawn.git
+npx shopify theme init /tmp/skop-dawn --clone-url https://github.com/Shopify/dawn.git
+cp -R /tmp/skop-dawn/assets /tmp/skop-dawn/config /tmp/skop-dawn/layout /tmp/skop-dawn/locales /tmp/skop-dawn/sections /tmp/skop-dawn/snippets /tmp/skop-dawn/templates .
 ```
 
-Expected: `theme/layout/theme.liquid`, `theme/config/settings_schema.json`, and the base theme templates exist locally.
+Expected: `layout/theme.liquid`, `config/settings_schema.json`, and the base theme templates exist locally.
 
 - [ ] **Step 6: Write a smoke test**
 
@@ -404,7 +403,7 @@ npx shopify auth login
 Start the development theme in a dedicated terminal and keep it running during browser tests:
 
 ```bash
-npx shopify theme dev --store "$SKOP_SHOPIFY_STORE" --path theme
+npx shopify theme dev --store "$SKOP_SHOPIFY_STORE" --path .
 ```
 
 Expected: Shopify CLI returns editor and preview URLs. Capture the complete preview URL as `SKOP_PREVIEW_URL` using the validated input block under Runtime Inputs.
@@ -433,15 +432,15 @@ git commit -m "docs: define SKOP Shopify admin security controls"
 
 **Files:**
 
-- Create: `theme/assets/skop-tokens.css`
-- Create: `theme/assets/skop-base.css`
-- Create: `theme/assets/skop-wordmark.svg`
-- Create: `theme/assets/skop-mark.svg`
-- Modify: `theme/layout/theme.liquid`
-- Modify: `theme/config/settings_schema.json`
-- Modify: `theme/sections/header.liquid`
-- Modify: `theme/sections/footer.liquid`
-- Modify: `theme/locales/en.default.json`
+- Create: `assets/skop-tokens.css`
+- Create: `assets/skop-base.css`
+- Create: `assets/skop-wordmark.svg`
+- Create: `assets/skop-mark.svg`
+- Modify: `layout/theme.liquid`
+- Modify: `config/settings_schema.json`
+- Modify: `sections/header.liquid`
+- Modify: `sections/footer.liquid`
+- Modify: `locales/en.default.json`
 - Test: `tests/e2e/homepage.spec.js`
 
 **Interfaces:**
@@ -458,7 +457,7 @@ import { describe, expect, it } from 'vitest';
 
 describe('SKOP design tokens', () => {
   it('defines the master and five formulation colors', () => {
-    const css = readFileSync('theme/assets/skop-tokens.css', 'utf8');
+    const css = readFileSync('assets/skop-tokens.css', 'utf8');
     for (const token of [
       '--skop-graphite',
       '--skop-mineral',
@@ -483,12 +482,12 @@ Run:
 npx vitest run tests/unit/custom-data.test.js
 ```
 
-Expected: FAIL because `theme/assets/skop-tokens.css` does not exist.
+Expected: FAIL because `assets/skop-tokens.css` does not exist.
 
 - [ ] **Step 3: Implement the tokens**
 
 ```css
-/* theme/assets/skop-tokens.css */
+/* assets/skop-tokens.css */
 :root {
   --skop-graphite: #0d1214;
   --skop-graphite-soft: #182326;
@@ -512,7 +511,7 @@ Expected: FAIL because `theme/assets/skop-tokens.css` does not exist.
 - [ ] **Step 4: Add accessible base rules**
 
 ```css
-/* theme/assets/skop-base.css */
+/* assets/skop-base.css */
 .skop-section {
   padding-block: var(--skop-space-section);
 }
@@ -545,7 +544,7 @@ Expected: FAIL because `theme/assets/skop-tokens.css` does not exist.
 
 - [ ] **Step 5: Load assets in the theme layout**
 
-Add before `</head>` in `theme/layout/theme.liquid`:
+Add before `</head>` in `layout/theme.liquid`:
 
 ```liquid
 {{ 'skop-tokens.css' | asset_url | stylesheet_tag }}
@@ -558,7 +557,7 @@ Create `skop-wordmark.svg` with the approved uppercase geometric `SKOP` wordmark
 
 - [ ] **Step 7: Configure header and footer identity**
 
-Use the wordmark in `theme/sections/header.liquid`, preserve a text `SKOP` fallback, and use the mark for the favicon through theme settings. Configure footer navigation, support contact, wholesale link, policies, and newsletter without duplicating navigation markup.
+Use the wordmark in `sections/header.liquid`, preserve a text `SKOP` fallback, and use the mark for the favicon through theme settings. Configure footer navigation, support contact, wholesale link, policies, and newsletter without duplicating navigation markup.
 
 - [ ] **Step 8: Run tests and Theme Check**
 
@@ -574,7 +573,7 @@ Expected: PASS with no Theme Check errors.
 - [ ] **Step 9: Commit**
 
 ```bash
-git add theme/assets theme/layout/theme.liquid theme/config theme/locales tests/unit/custom-data.test.js
+git add assets layout/theme.liquid config locales tests/unit/custom-data.test.js
 git commit -m "feat: add SKOP Precision Performance theme foundation"
 ```
 
@@ -730,16 +729,16 @@ git commit -m "feat: define SKOP product and evidence data model"
 
 **Files:**
 
-- Create: `theme/sections/skop-hero.liquid`
-- Create: `theme/sections/skop-formula-family-grid.liquid`
-- Create: `theme/sections/skop-evidence-grid.liquid`
-- Create: `theme/sections/skop-wholesale-cta.liquid`
-- Create: `theme/snippets/skop-formula-card.liquid`
-- Create: `theme/snippets/skop-proof-item.liquid`
-- Modify: `theme/templates/index.json`
-- Modify: `theme/sections/header.liquid`
-- Modify: `theme/sections/footer.liquid`
-- Modify: `theme/config/settings_data.json`
+- Create: `sections/skop-hero.liquid`
+- Create: `sections/skop-formula-family-grid.liquid`
+- Create: `sections/skop-evidence-grid.liquid`
+- Create: `sections/skop-wholesale-cta.liquid`
+- Create: `snippets/skop-formula-card.liquid`
+- Create: `snippets/skop-proof-item.liquid`
+- Modify: `templates/index.json`
+- Modify: `sections/header.liquid`
+- Modify: `sections/footer.liquid`
+- Modify: `config/settings_data.json`
 - Test: `tests/e2e/homepage.spec.js`
 
 **Interfaces:**
@@ -773,7 +772,7 @@ Expected: FAIL because the SKOP sections do not exist.
 - [ ] **Step 3: Implement the formula-card snippet**
 
 ```liquid
-{% comment %} theme/snippets/skop-formula-card.liquid {% endcomment %}
+{% comment %} snippets/skop-formula-card.liquid {% endcomment %}
 <article
   class='skop-formula-card'
   data-skop-formula-card
@@ -793,7 +792,7 @@ The hero schema must expose heading, body, primary link, secondary link, and pro
 
 - [ ] **Step 5: Configure the homepage template**
 
-Set `theme/templates/index.json` section order to the following section identifiers. Use custom sections for SKOP-specific behavior and Dawn's existing `multicolumn`, `video`, `featured-collection`, and `email-signup-banner` types for generic content:
+Set `templates/index.json` section order to the following section identifiers. Use custom sections for SKOP-specific behavior and Dawn's existing `multicolumn`, `video`, `featured-collection`, and `email-signup-banner` types for generic content:
 
 ```json
 [
@@ -837,7 +836,7 @@ Expected: Theme Check passes and homepage tests pass on desktop and mobile.
 - [ ] **Step 8: Commit**
 
 ```bash
-git add theme/sections theme/snippets theme/templates/index.json tests/e2e/homepage.spec.js
+git add sections snippets templates/index.json tests/e2e/homepage.spec.js
 git commit -m "feat: build SKOP homepage and formula navigation"
 ```
 
@@ -847,11 +846,11 @@ git commit -m "feat: build SKOP homepage and formula navigation"
 
 **Files:**
 
-- Create: `theme/sections/skop-product-main.liquid`
-- Create: `theme/sections/skop-product-evidence.liquid`
-- Create: `theme/snippets/skop-formula-badge.liquid`
-- Create: `theme/snippets/skop-purchase-selector.liquid`
-- Create: `theme/templates/product.skop.json`
+- Create: `sections/skop-product-main.liquid`
+- Create: `sections/skop-product-evidence.liquid`
+- Create: `snippets/skop-formula-badge.liquid`
+- Create: `snippets/skop-purchase-selector.liquid`
+- Create: `templates/product.skop.json`
 - Test: `tests/e2e/product-purchase.spec.js`
 
 **Interfaces:**
@@ -894,7 +893,7 @@ Expected: FAIL because the SKOP product template is not assigned.
 - [ ] **Step 3: Implement a progressively enhanced product form**
 
 ```liquid
-{% comment %} theme/snippets/skop-purchase-selector.liquid {% endcomment %}
+{% comment %} snippets/skop-purchase-selector.liquid {% endcomment %}
 {% form 'product', product, id: 'skop-product-form', data-product-form: '' %}
   <input type='hidden' name='id' value='{{ product.selected_or_first_available_variant.id }}'>
   <p>{{ 'products.one_time_available' | t }}</p>
@@ -956,7 +955,7 @@ Expected: PASS.
 - [ ] **Step 8: Commit**
 
 ```bash
-git add theme/sections/skop-product-main.liquid theme/sections/skop-product-evidence.liquid theme/snippets/skop-formula-badge.liquid theme/snippets/skop-purchase-selector.liquid theme/templates/product.skop.json tests/e2e/product-purchase.spec.js
+git add sections/skop-product-main.liquid sections/skop-product-evidence.liquid snippets/skop-formula-badge.liquid snippets/skop-purchase-selector.liquid templates/product.skop.json tests/e2e/product-purchase.spec.js
 git commit -m "feat: add SKOP product and purchase experience"
 ```
 
@@ -966,11 +965,11 @@ git commit -m "feat: add SKOP product and purchase experience"
 
 **Files:**
 
-- Create: `theme/assets/skop-formula-rules.json`
+- Create: `assets/skop-formula-rules.json`
 - Create: `scripts/validate-formula-rules.mjs`
-- Create: `theme/assets/skop-formula-finder.js`
-- Create: `theme/sections/skop-formula-finder.liquid`
-- Create: `theme/templates/page.formula-finder.json`
+- Create: `assets/skop-formula-finder.js`
+- Create: `sections/skop-formula-finder.liquid`
+- Create: `templates/page.formula-finder.json`
 - Test: `tests/unit/formula-finder.test.js`
 - Test: `tests/e2e/formula-finder.spec.js`
 
@@ -1023,7 +1022,7 @@ git commit -m "feat: add SKOP product and purchase experience"
 
 ```js
 import { describe, expect, it } from 'vitest';
-import { recommendFormula } from '../../theme/assets/skop-formula-finder.js';
+import { recommendFormula } from '../../assets/skop-formula-finder.js';
 
 const rules = {
   formulas: {
@@ -1080,7 +1079,7 @@ Expected: FAIL because `recommendFormula` does not exist.
 - [ ] **Step 4: Implement the pure recommendation function**
 
 ```js
-// theme/assets/skop-formula-finder.js
+// assets/skop-formula-finder.js
 export function recommendFormula(input, rules) {
   const formulaCode = rules.activities[input.activity];
   if (!formulaCode) throw new Error(`Unsupported activity: ${input.activity}`);
@@ -1153,7 +1152,7 @@ test('formula finder recommends the climbing family without substitution', async
 
 - [ ] **Step 7: Validate every answer path**
 
-Run a script that loads `theme/assets/skop-formula-rules.json`, verifies every listed activity maps to one of `F01` through `F05`, verifies every formula points to one stable draft product handle, verifies every interval is one of `4`, `6`, or `8`, and verifies every perspiration and session choice has an application profile and pack recommendation. The result page resolves the application profile to the selected product's approved `skop.application_amount` metafield, so no unapproved use instruction is embedded in JavaScript.
+Run a script that loads `assets/skop-formula-rules.json`, verifies every listed activity maps to one of `F01` through `F05`, verifies every formula points to one stable draft product handle, verifies every interval is one of `4`, `6`, or `8`, and verifies every perspiration and session choice has an application profile and pack recommendation. The result page resolves the application profile to the selected product's approved `skop.application_amount` metafield, so no unapproved use instruction is embedded in JavaScript.
 
 - [ ] **Step 8: Run all tests**
 
@@ -1170,7 +1169,7 @@ Expected: PASS.
 - [ ] **Step 9: Commit**
 
 ```bash
-git add theme/assets/skop-formula-rules.json scripts/validate-formula-rules.mjs theme/assets/skop-formula-finder.js theme/sections/skop-formula-finder.liquid theme/templates/page.formula-finder.json tests/unit/formula-finder.test.js tests/e2e/formula-finder.spec.js
+git add assets/skop-formula-rules.json scripts/validate-formula-rules.mjs assets/skop-formula-finder.js sections/skop-formula-finder.liquid templates/page.formula-finder.json tests/unit/formula-finder.test.js tests/e2e/formula-finder.spec.js
 git commit -m "feat: add deterministic SKOP formula finder"
 ```
 
@@ -1180,8 +1179,8 @@ git commit -m "feat: add deterministic SKOP formula finder"
 
 **Files:**
 
-- Create: `theme/assets/skop-bundle-builder.js`
-- Create: `theme/sections/skop-bundle-builder.liquid`
+- Create: `assets/skop-bundle-builder.js`
+- Create: `sections/skop-bundle-builder.liquid`
 - Test: `tests/unit/bundle-builder.test.js`
 - Modify: `docs/runbooks/supplier-reconciliation.md`
 
@@ -1194,7 +1193,7 @@ git commit -m "feat: add deterministic SKOP formula finder"
 
 ```js
 import { expect, it } from 'vitest';
-import { validateBundleSelection } from '../../theme/assets/skop-bundle-builder.js';
+import { validateBundleSelection } from '../../assets/skop-bundle-builder.js';
 
 it('accepts exactly three eligible one-time items', () => {
   expect(validateBundleSelection([{ id: 1 }, { id: 2 }, { id: 3 }], 3, 3)).toEqual({
@@ -1224,7 +1223,7 @@ Expected: FAIL because `validateBundleSelection` does not exist.
 - [ ] **Step 3: Implement selection validation**
 
 ```js
-// theme/assets/skop-bundle-builder.js
+// assets/skop-bundle-builder.js
 export function validateBundleSelection(items, min, max) {
   if (items.length < min || items.length > max) {
     const amount = min === max ? `exactly ${min}` : `between ${min} and ${max}`;
@@ -1275,7 +1274,7 @@ Expected: PASS.
 - [ ] **Step 9: Commit**
 
 ```bash
-git add theme/assets/skop-bundle-builder.js tests/unit/bundle-builder.test.js docs/runbooks/supplier-reconciliation.md
+git add assets/skop-bundle-builder.js tests/unit/bundle-builder.test.js docs/runbooks/supplier-reconciliation.md
 git commit -m "feat: add SKOP bundle catalog and builder logic"
 ```
 
@@ -1285,8 +1284,8 @@ git commit -m "feat: add SKOP bundle catalog and builder logic"
 
 **Files:**
 
-- Modify: `theme/templates/product.skop.json`
-- Modify: `theme/snippets/skop-purchase-selector.liquid`
+- Modify: `templates/product.skop.json`
+- Modify: `snippets/skop-purchase-selector.liquid`
 - Create: subscription test checklist in `docs/runbooks/launch-and-rollback.md`
 - Test: `tests/e2e/product-purchase.spec.js`
 
@@ -1352,7 +1351,7 @@ Expected: PASS for one-time default and subscription opt-in.
 - [ ] **Step 9: Commit**
 
 ```bash
-git add theme/templates/product.skop.json theme/snippets/skop-purchase-selector.liquid docs/runbooks/launch-and-rollback.md tests/e2e/product-purchase.spec.js
+git add templates/product.skop.json snippets/skop-purchase-selector.liquid docs/runbooks/launch-and-rollback.md tests/e2e/product-purchase.spec.js
 git commit -m "feat: configure SKOP replenishment subscriptions"
 ```
 
@@ -1362,8 +1361,8 @@ git commit -m "feat: configure SKOP replenishment subscriptions"
 
 **Files:**
 
-- Create: `theme/templates/page.wholesale.json`
-- Create: `theme/sections/skop-wholesale-application.liquid`
+- Create: `templates/page.wholesale.json`
+- Create: `sections/skop-wholesale-application.liquid`
 - Modify: `docs/runbooks/admin-security.md`
 - Test: authenticated wholesale test checklist
 
@@ -1431,7 +1430,7 @@ Submit one approved and one declined application. Verify tags, notifications, ac
 - [ ] **Step 7: Commit**
 
 ```bash
-git add theme/templates/page.wholesale.json theme/sections docs/runbooks/admin-security.md
+git add templates/page.wholesale.json sections docs/runbooks/admin-security.md
 git commit -m "feat: add SKOP lightweight wholesale workflow"
 ```
 
@@ -1609,9 +1608,9 @@ git commit -m "docs: record SKOP market and commerce configuration"
 
 **Files:**
 
-- Create: `theme/templates/page.results.json`
-- Modify: `theme/sections/skop-evidence-grid.liquid`
-- Modify: `theme/sections/skop-product-evidence.liquid`
+- Create: `templates/page.results.json`
+- Modify: `sections/skop-evidence-grid.liquid`
+- Modify: `sections/skop-product-evidence.liquid`
 - Create or configure: About, technology, results, ingredients, safety, FAQ, contact, and policy pages
 - Test: evidence visibility checklist
 
@@ -1678,7 +1677,7 @@ Expected: PASS, and every published claim has a documented approval record.
 - [ ] **Step 8: Commit**
 
 ```bash
-git add theme/templates/page.results.json theme/sections
+git add templates/page.results.json sections
 git commit -m "feat: publish SKOP evidence and product content framework"
 ```
 
@@ -1851,9 +1850,7 @@ for (const path of ['/', '/pages/find-your-formula', '/collections/all', '/pages
   test(`${path} has no serious or critical accessibility violations`, async ({ page }) => {
     await page.goto(path);
     const results = await new AxeBuilder({ page }).analyze();
-    const blocking = results.violations.filter(({ impact }) =>
-      ['serious', 'critical'].includes(impact),
-    );
+    const blocking = results.violations.filter(({ impact }) => ['serious', 'critical'].includes(impact));
     expect(blocking).toEqual([]);
   });
 }
@@ -1883,7 +1880,7 @@ Verify every gate from Section 24 of the approved design specification. Attach e
 Run:
 
 ```bash
-npx shopify theme push --store "$SKOP_SHOPIFY_STORE" --path theme --unpublished
+npx shopify theme push --store "$SKOP_SHOPIFY_STORE" --path . --unpublished
 npx shopify theme list --store "$SKOP_SHOPIFY_STORE"
 ```
 

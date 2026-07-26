@@ -23,8 +23,8 @@ Before making changes:
 
 ## Repository workflow
 
-- Main implementation branch: `feature/skop-store-build`
-- Shopify-connected deployment branch: `shopify-preview` after it is created
-- Theme source in the implementation branch: `theme/`
-- Do not connect `feature/skop-store-build` directly to Shopify. Shopify requires theme directories at the branch root.
+- The only long-lived branch is `main`.
+- The Shopify-connected theme branch is `main`.
+- Theme directories such as `assets/`, `config/`, `layout/`, `sections/`, and `templates/` are at the repository root.
+- Keep code, tests, documentation, and theme changes on `main`.
 - Do not publish the connected theme. Keep it in the theme library for preview until the launch gates pass.

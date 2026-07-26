@@ -13,4 +13,4 @@ Supporting sources:
 - [Shopify admin security runbook](docs/runbooks/admin-security.md)
 - [GitHub-to-Shopify connection runbook](docs/runbooks/github-shopify-connection.md)
 
-The theme source is under `theme/`. The Shopify GitHub integration requires theme folders at a connected branch's root, so use the dedicated deployment branch described in the connection runbook.
+The theme directories are at the repository root, allowing Shopify's native GitHub integration to connect directly to `main`. The connected theme must remain unpublished until the launch gates pass.

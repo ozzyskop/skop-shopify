@@ -8,7 +8,7 @@
 
 **Domain:** `skop.us`
 
-**Current implementation branch:** `feature/skop-store-build`
+**Current branch:** `main`
 
 ## Start here
 
@@ -123,9 +123,9 @@ Task status:
 - Task 2, store and administrative security: runbook implemented, with external owner gates deferred
 - Tasks 3 through 16: not yet implemented
 
-Task 1 verification used the explicit theme path because the original `cd theme && shopify theme check` command failed with the available Shopify CLI. Preserve the verified command in `package.json`.
+Task 1 verification uses the explicit repository-root theme path because the original nested-directory command failed with the available Shopify CLI. Preserve the verified command in `package.json`.
 
-The current theme source is under `theme/`.
+The theme directories are at the repository root so Shopify can connect directly to `main`.
 
 ## Shopify access issue and selected workaround
 
@@ -136,19 +136,18 @@ Do not spend time retrying the same CLI flow from that environment.
 On the new machine:
 
 1. Authenticate GitHub normally.
-2. Clone this repository and switch to `feature/skop-store-build`.
+2. Clone this repository and use `main`.
 3. Authenticate Shopify CLI locally if desired.
 4. Prefer the native GitHub theme integration for durable synchronization.
 5. Follow `docs/runbooks/github-shopify-connection.md`.
 
 ## Exact next actions
 
-1. Confirm this handoff commit exists on `origin/feature/skop-store-build`.
-2. Create and push the generated `shopify-preview` branch with `theme/` at the branch root.
-3. Connect `shopify-preview` as an unpublished Shopify theme.
-4. Verify bidirectional synchronization.
-5. Capture a normal unpublished preview URL for testing, but do not commit credential-bearing URLs.
-6. Run:
+1. Confirm this handoff exists on `origin/main`.
+2. Connect `main` as an unpublished Shopify theme.
+3. Verify bidirectional synchronization.
+4. Capture a normal unpublished preview URL for testing, but do not commit credential-bearing URLs.
+5. Run:
 
    ```bash
    npm ci
@@ -156,7 +155,7 @@ On the new machine:
    npm run theme:check
    ```
 
-7. Resume the implementation plan at Task 3.
+6. Resume the implementation plan at Task 3.
 
 ## Safety boundaries
 
