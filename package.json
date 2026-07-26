@@ -1,0 +1,28 @@
+{
+  "name": "skop-shopify",
+  "private": true,
+  "engines": {
+    "node": ">=22 <23"
+  },
+  "scripts": {
+    "format:check": "prettier --check .",
+    "format:write": "prettier --write .",
+    "theme:check": "cd theme && shopify theme check",
+    "test:unit": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "check": "npm run format:check && npm run theme:check && npm run test:coverage"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.12.1",
+    "@lhci/cli": "0.15.1",
+    "@playwright/test": "1.62.0",
+    "@shopify/cli": "4.5.2",
+    "@shopify/prettier-plugin-liquid": "1.11.0",
+    "@vitest/coverage-v8": "4.1.10",
+    "jsdom": "29.1.1",
+    "prettier": "3.9.6",
+    "vitest": "4.1.10",
+    "yaml": "2.9.0"
+  }
+}
