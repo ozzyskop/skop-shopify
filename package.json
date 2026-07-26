@@ -7,7 +7,7 @@
   "scripts": {
     "format:check": "prettier --check .",
     "format:write": "prettier --write .",
-    "theme:check": "cd theme && shopify theme check",
+    "theme:check": "shopify theme check --path theme",
     "test:unit": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test",
