@@ -43,9 +43,14 @@ The owner performs a review at least monthly and immediately after offboarding, 
 
 - Do not commit passwords, passkeys, recovery codes, API secrets, access tokens, browser-session data, or credential-bearing URLs to source control, issues, pull requests, or this runbook.
 - Recovery codes are stored by the owner outside the repository in an owner-controlled secure location. Verify that recovery methods remain available when owner authentication changes.
+- Before production launch, the owner must verify that at least one current recovery method works, that recovery codes are stored in an owner-controlled secure location, and that obsolete recovery methods have been removed. Record only the completion date and reviewer outside this public repository, never the recovery material itself.
 - Use the existing owner-authorized Shopify CLI device authorization flow only. Do not start a second authentication flow, inspect local credentials, or copy CLI session material into files or chat.
 - Use task-specific, revocable credentials where an integration is required, keep them outside the repository, and rotate or revoke them after the task or after a suspected exposure.
 - If credentials or recovery material are exposed, revoke or rotate the affected access promptly, remove it from any shared surface where possible, and notify the owner.
+
+## Shopify CLI connectivity note
+
+The original implementation workspace could reach the store hostname but could not establish its proxy tunnel to `accounts.shopify.com`. Authentication failed at OAuth device authorization or token exchange with a 5-second proxy-tunnel timeout. This is an environment-specific network restriction, not a confirmed Shopify account problem. Use a different machine with normal Shopify account connectivity or the native GitHub theme integration. Never copy CLI session material between machines.
 
 ## Pending handoff items
 
@@ -53,3 +58,4 @@ The owner performs a review at least monthly and immediately after offboarding, 
 - Obtain and approve the named implementation collaborator account before granting implementation access.
 - Complete the owner-confirmed paid-plan purchase gate before any plan purchase.
 - Capture `SKOP_PREVIEW_URL` only from the active owner-authorized Shopify CLI development session; keep it out of source control if it contains credential-bearing query material.
+- Verify a current owner recovery method before launch without recording recovery secrets in this repository.
