@@ -1,0 +1,14 @@
+{% doc %}
+  Renders a concise SKOP proof or readiness item.
+
+  @param {string} label - Short proof label.
+  @param {string} detail - Supporting detail.
+{% enddoc %}
+
+<div class="skop-proof-item">
+  <span class="skop-proof-item__marker" aria-hidden="true"></span>
+  <div>
+    <strong>{{ label | escape }}</strong>
+    <span>{{ detail | escape }}</span>
+  </div>
+</div>

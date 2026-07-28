@@ -1,69 +1,387 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "skop_hero": {
+      "type": "skop-hero",
+      "settings": {
+        "eyebrow": "Five formulas. One precise system.",
+        "heading": "Control starts at the hand.",
+        "body": "<p>A sport-specific, 50 ml hand-performance gel platform being built for athletes, competitors, performers, and focused play.</p>",
+        "primary_label": "Find your formula",
+        "primary_link": "/pages/find-your-formula",
+        "secondary_label": "Explore the system",
+        "secondary_link": "#formula-families",
+        "note": "Product details and performance claims remain subject to final validation.",
+        "visual_label": "Concept illustration of a SKOP 50 ml tube"
+      }
+    },
+    "skop_proof_bar": {
+      "type": "skop-proof-bar",
+      "blocks": {
+        "proof_1": {
+          "type": "proof",
+          "settings": {
+            "label": "Five formulations",
+            "detail": "Mapped to activity context"
+          }
+        },
+        "proof_2": {
+          "type": "proof",
+          "settings": {
+            "label": "50 ml format",
+            "detail": "One consistent tube system"
+          }
+        },
+        "proof_3": {
+          "type": "proof",
+          "settings": {
+            "label": "Buy once first",
+            "detail": "Subscription is always optional"
+          }
+        },
+        "proof_4": {
+          "type": "proof",
+          "settings": {
+            "label": "Evidence gated",
+            "detail": "Claims require approval"
+          }
+        }
+      },
+      "block_order": ["proof_1", "proof_2", "proof_3", "proof_4"],
+      "settings": {}
+    },
+    "skop_formula_family_grid": {
+      "type": "skop-formula-family-grid",
+      "blocks": {
+        "f01": {
+          "type": "formula",
+          "settings": {
+            "code": "F01",
+            "title": "Shooting",
+            "activities": "Shooting",
+            "accent": "#FFB347"
+          }
+        },
+        "f02": {
+          "type": "formula",
+          "settings": {
+            "code": "F02",
+            "title": "Racket sports",
+            "activities": "Tennis, pickleball, squash, badminton, padel",
+            "accent": "#B9EB48"
+          }
+        },
+        "f03": {
+          "type": "formula",
+          "settings": {
+            "code": "F03",
+            "title": "Climbing + strength",
+            "activities": "Rock climbing, CrossFit, weightlifting, ninja",
+            "accent": "#4BD8EA"
+          }
+        },
+        "f04": {
+          "type": "formula",
+          "settings": {
+            "code": "F04",
+            "title": "Pole dancing",
+            "activities": "Pole dancing",
+            "accent": "#FF5CA8"
+          }
+        },
+        "f05": {
+          "type": "formula",
+          "settings": {
+            "code": "F05",
+            "title": "Focus control",
+            "activities": "Drumming and computer gaming",
+            "accent": "#9271FF"
+          }
+        }
+      },
+      "block_order": ["f01", "f02", "f03", "f04", "f05"],
+      "settings": {
+        "eyebrow": "The formulation system",
+        "heading": "Built around how you use your hands.",
+        "body": "<p>Five distinct formula families organize SKOP around equipment, movement, contact, and activity context.</p>",
+        "finder_label": "Find your formula",
+        "finder_link": "/pages/find-your-formula"
+      }
+    },
+    "how_it_works": {
+      "type": "multicolumn",
+      "blocks": {
+        "step_1": {
+          "type": "column",
+          "settings": {
+            "title": "01 / Choose the context",
+            "text": "<p>Start with the activity, equipment, and hand-contact pattern.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "step_2": {
+          "type": "column",
+          "settings": {
+            "title": "02 / Apply the formula",
+            "text": "<p>Approved usage guidance will define amount, coverage, and drying steps.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "step_3": {
+          "type": "column",
+          "settings": {
+            "title": "03 / Replenish your way",
+            "text": "<p>Buy once by default, or choose an optional 4, 6, or 8 week cadence.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["step_1", "step_2", "step_3"],
+      "settings": {
+        "title": "A simple path to the right formula.",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "skop_evidence_grid": {
+      "type": "skop-evidence-grid",
+      "blocks": {
+        "evidence_1": {
+          "type": "evidence",
+          "settings": {
+            "index": "01",
+            "title": "Laboratory results",
+            "text": "Comparative records tied to a named formulation and documented method.",
+            "status": "Pending validation"
+          }
+        },
+        "evidence_2": {
+          "type": "evidence",
+          "settings": {
+            "index": "02",
+            "title": "Ingredients + safety",
+            "text": "Formula-specific files, warnings, and jurisdictional review.",
+            "status": "Pending documents"
+          }
+        },
+        "evidence_3": {
+          "type": "evidence",
+          "settings": {
+            "index": "03",
+            "title": "Athlete + expert use",
+            "text": "Attributed records shown only with explicit written permission.",
+            "status": "Pending permission"
+          }
+        }
+      },
+      "block_order": ["evidence_1", "evidence_2", "evidence_3"],
+      "settings": {
+        "eyebrow": "Evidence before claims",
+        "heading": "A proof system, not a promise wall.",
+        "body": "<p>Lab, safety, athlete, and demonstration records will appear only after their source and permissions are approved.</p>"
+      }
+    },
+    "demo_video": {
+      "type": "multicolumn",
+      "blocks": {
+        "demo": {
+          "type": "column",
+          "settings": {
+            "title": "Application demonstration",
+            "text": "<p>A captioned, formulation-specific demonstration will show application, drying, contact, and cleanup after media approval.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["demo"],
+      "settings": {
+        "title": "See the method, step by step.",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "columns_desktop": 1,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "endorsements": {
+      "type": "multicolumn",
+      "blocks": {
+        "endorsement": {
+          "type": "column",
+          "settings": {
+            "title": "Endorsements with permission",
+            "text": "<p>Athlete and expert records will include discipline, attribution, usage rights, and disclosure where required.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["endorsement"],
+      "settings": {
+        "title": "Credibility you can trace.",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "columns_desktop": 1,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "bundles": {
+      "type": "multicolumn",
+      "blocks": {
+        "bundle_1": {
+          "type": "column",
+          "settings": {
+            "title": "Discovery kit",
+            "text": "<p>Five-formulation kit architecture pending supplier SKU approval.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "bundle_2": {
+          "type": "column",
+          "settings": {
+            "title": "Multipacks",
+            "text": "<p>Same-formulation 2-, 3-, and 6-tube configurations pending final catalog.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "bundle_3": {
+          "type": "column",
+          "settings": {
+            "title": "Build your own",
+            "text": "<p>Mix formula families as separate cart lines with an approved discount later.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["bundle_1", "bundle_2", "bundle_3"],
+      "settings": {
+        "title": "A system that scales with your routine.",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "primary",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "testimonials": {
+      "type": "multicolumn",
+      "blocks": {
+        "testimonial": {
+          "type": "column",
+          "settings": {
+            "title": "Customer trials are being structured",
+            "text": "<p>Only attributed, permissioned, formulation-specific feedback will appear here.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["testimonial"],
+      "settings": {
+        "title": "Real use. Clear context.",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "columns_desktop": 1,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "skop_wholesale_cta": {
+      "type": "skop-wholesale-cta",
+      "settings": {
+        "eyebrow": "For teams, gyms, studios, and retailers",
+        "heading": "Bring SKOP to your community.",
+        "body": "<p>Wholesale access will support approved accounts, documented case packs, and clear fulfillment terms.</p>",
+        "button_label": "Explore wholesale",
+        "button_link": "/pages/wholesale"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
       "blocks": {
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
-            "heading_size": "h0"
+            "heading": "Follow the build.",
+            "heading_size": "h1"
           }
         },
-        "button": {
-          "type": "buttons",
+        "paragraph": {
+          "type": "paragraph",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "<p>Get launch updates, formulation education, and approved product news.</p>"
           }
+        },
+        "email": {
+          "type": "email_form",
+          "settings": {}
         }
       },
-      "block_order": ["heading", "button"],
+      "block_order": ["heading", "paragraph", "email"],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
         "color_scheme": "scheme-1",
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "padding_top": 44,
-        "padding_bottom": 36
+        "full_width": true,
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     }
   },
-  "order": ["image_banner", "featured_collection"]
+  "order": [
+    "skop_hero",
+    "skop_proof_bar",
+    "skop_formula_family_grid",
+    "how_it_works",
+    "skop_evidence_grid",
+    "demo_video",
+    "endorsements",
+    "bundles",
+    "testimonials",
+    "skop_wholesale_cta",
+    "newsletter"
+  ]
 }

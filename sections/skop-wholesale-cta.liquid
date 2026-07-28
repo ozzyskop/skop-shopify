@@ -1,0 +1,103 @@
+<section class="skop-wholesale skop-section">
+  <div class="page-width">
+    <div class="skop-wholesale__panel">
+      <div>
+        <p class="skop-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+      <div>
+        <div class="rte">{{ section.settings.body }}</div>
+        {%- if section.settings.button_label != blank -%}
+          <a class="button" href="{{ section.settings.button_link }}">
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .skop-wholesale {
+    background: var(--skop-mineral);
+  }
+
+  .skop-wholesale__panel {
+    align-items: center;
+    background: var(--skop-mint);
+    border-radius: var(--skop-radius-lg);
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: 1.2fr 0.8fr;
+    padding: clamp(3rem, 7vw, 8rem);
+  }
+
+  .skop-wholesale .skop-eyebrow {
+    color: var(--skop-graphite);
+    opacity: 0.62;
+  }
+
+  .skop-wholesale h2 {
+    font-size: clamp(4rem, 7vw, 8rem);
+    letter-spacing: -0.06em;
+    line-height: 0.92;
+    margin: 1.5rem 0 0;
+  }
+
+  .skop-wholesale .button {
+    background: var(--skop-graphite);
+    border-radius: 999px;
+    color: var(--skop-white);
+    margin-top: 2.5rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .skop-wholesale__panel {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SKOP wholesale callout",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "For teams, gyms, studios, and retailers"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Bring SKOP to your community."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Wholesale access will support approved accounts, documented case packs, and clear fulfillment terms.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Explore wholesale"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SKOP wholesale callout"
+    }
+  ]
+}
+{% endschema %}

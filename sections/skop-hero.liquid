@@ -1,0 +1,272 @@
+<section class="skop-hero">
+  <div class="page-width skop-hero__grid">
+    <div class="skop-hero__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="skop-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 class="skop-hero__heading">{{ section.settings.heading }}</h1>
+      <div class="skop-hero__body rte">{{ section.settings.body }}</div>
+      <div class="skop-hero__actions">
+        {%- if section.settings.primary_label != blank -%}
+          <a class="button" href="{{ section.settings.primary_link }}">
+            {{ section.settings.primary_label | escape }}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.secondary_label != blank -%}
+          <a class="button button--secondary" href="{{ section.settings.secondary_link }}">
+            {{ section.settings.secondary_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+      <p class="skop-hero__note">{{ section.settings.note | escape }}</p>
+    </div>
+
+    <div class="skop-hero__visual" aria-label="{{ section.settings.visual_label | escape }}">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1400
+          | image_tag:
+            widths: '480, 720, 960, 1200, 1400',
+            sizes: '(min-width: 990px) 48vw, 92vw',
+            loading: 'eager',
+            fetchpriority: 'high'
+        }}
+      {%- else -%}
+        <div class="skop-hero__tube">
+          <span class="skop-hero__tube-brand">SKOP<span>.</span></span>
+          <span class="skop-hero__tube-code">F / 01–05</span>
+          <span class="skop-hero__tube-volume">50 ml</span>
+        </div>
+        <div class="skop-hero__orbit skop-hero__orbit--one"></div>
+        <div class="skop-hero__orbit skop-hero__orbit--two"></div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .skop-hero {
+    background: radial-gradient(circle at 72% 22%, rgb(80 240 189 / 18%), transparent 24rem), var(--skop-graphite);
+    color: var(--skop-white);
+    min-height: min(86rem, calc(100svh - 7rem));
+    overflow: hidden;
+  }
+
+  .skop-hero__grid {
+    align-items: center;
+    display: grid;
+    gap: clamp(4rem, 8vw, 10rem);
+    grid-template-columns: minmax(0, 1fr) minmax(28rem, 0.86fr);
+    min-height: inherit;
+    padding-block: clamp(7rem, 12vw, 13rem);
+  }
+
+  .skop-hero__heading {
+    color: inherit;
+    font-size: clamp(5rem, 8vw, 10.5rem);
+    letter-spacing: -0.065em;
+    line-height: 0.88;
+    margin: 1.8rem 0 3rem;
+    max-width: 10ch;
+  }
+
+  .skop-hero__body {
+    color: rgb(255 255 255 / 72%);
+    font-size: clamp(1.7rem, 2vw, 2.1rem);
+    max-width: 58rem;
+  }
+
+  .skop-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    margin-top: 3.5rem;
+  }
+
+  .skop-hero__actions .button {
+    background: var(--skop-mint);
+    border-radius: 999px;
+    color: var(--skop-graphite);
+    min-height: 5.4rem;
+  }
+
+  .skop-hero__actions .button--secondary {
+    background: transparent;
+    box-shadow: inset 0 0 0 1px rgb(255 255 255 / 38%);
+    color: var(--skop-white);
+  }
+
+  .skop-hero__note {
+    color: rgb(255 255 255 / 52%);
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    margin-top: 2rem;
+  }
+
+  .skop-hero__visual {
+    align-items: center;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+    position: relative;
+  }
+
+  .skop-hero__visual img {
+    height: auto;
+    max-height: 70rem;
+    object-fit: contain;
+    position: relative;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .skop-hero__tube {
+    background: linear-gradient(150deg, #fff 0 68%, #e7ece9 100%);
+    border-radius: 3rem 3rem 1.4rem 1.4rem;
+    box-shadow: 0 4rem 8rem rgb(0 0 0 / 42%);
+    color: var(--skop-graphite);
+    display: flex;
+    flex-direction: column;
+    height: clamp(34rem, 46vw, 58rem);
+    justify-content: space-between;
+    padding: 5rem 3rem 3rem;
+    position: relative;
+    transform: rotate(8deg);
+    width: clamp(14rem, 20vw, 23rem);
+    z-index: 2;
+  }
+
+  .skop-hero__tube::after {
+    background: linear-gradient(
+      90deg,
+      var(--skop-shooting),
+      var(--skop-racket),
+      var(--skop-vertical),
+      var(--skop-pole),
+      var(--skop-focus)
+    );
+    bottom: 7rem;
+    content: '';
+    height: 1.2rem;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+
+  .skop-hero__tube-brand {
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 900;
+    letter-spacing: -0.08em;
+  }
+
+  .skop-hero__tube-brand span {
+    color: var(--skop-mint);
+  }
+
+  .skop-hero__tube-code,
+  .skop-hero__tube-volume {
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .skop-hero__orbit {
+    border: 1px solid rgb(255 255 255 / 14%);
+    border-radius: 50%;
+    position: absolute;
+  }
+
+  .skop-hero__orbit--one {
+    inset: 8%;
+  }
+
+  .skop-hero__orbit--two {
+    inset: 21%;
+  }
+
+  @media screen and (max-width: 749px) {
+    .skop-hero__grid {
+      grid-template-columns: 1fr;
+      padding-block: 6rem;
+    }
+
+    .skop-hero__visual {
+      max-height: 48rem;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SKOP hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Five formulas. One precise system."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Control starts at the hand."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>A sport-specific, 50 ml hand-performance gel platform being built for athletes, competitors, performers, and focused play.</p>"
+    },
+    {
+      "type": "text",
+      "id": "primary_label",
+      "label": "Primary button label",
+      "default": "Find your formula"
+    },
+    {
+      "type": "url",
+      "id": "primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_label",
+      "label": "Secondary button label",
+      "default": "Explore the system"
+    },
+    {
+      "type": "url",
+      "id": "secondary_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Supporting note",
+      "default": "Product details and performance claims remain subject to final validation."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product image"
+    },
+    {
+      "type": "text",
+      "id": "visual_label",
+      "label": "Placeholder visual label",
+      "default": "Concept illustration of a SKOP 50 ml tube"
+    }
+  ],
+  "presets": [
+    {
+      "name": "SKOP hero"
+    }
+  ]
+}
+{% endschema %}

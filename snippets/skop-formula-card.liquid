@@ -1,0 +1,47 @@
+{% doc %}
+  Renders a SKOP formulation-family card with an optional product destination.
+
+  @param {product} [product] - Optional published Shopify product.
+  @param {string} code - Stable formulation code.
+  @param {string} title - Formulation-family title.
+  @param {string} activities - Supported activity summary.
+  @param {string} accent - Card accent color.
+  @param {string} [link_url] - Fallback destination when no product is available.
+{% enddoc %}
+
+{%- liquid
+  assign card_title = title
+  assign card_code = code
+  assign card_activities = activities
+  assign card_accent = accent | default: '#50F0BD'
+  assign card_url = link_url
+
+  if product != blank
+    assign card_title = product.metafields.skop.formula_family.value | default: product.title
+    assign card_code = product.metafields.skop.formula_code.value | default: code
+    assign card_accent = product.metafields.skop.accent_color.value | default: card_accent
+    assign product_activities = product.metafields.skop.supported_activities.value
+    if product_activities != blank
+      assign card_activities = product_activities | join: ', '
+    endif
+    assign card_url = product.url
+  endif
+-%}
+
+<article
+  class="skop-formula-card"
+  data-skop-formula-card
+  style="--formula-accent: {{ card_accent }};"
+>
+  <span class="skop-formula-card__signal" aria-hidden="true"></span>
+  <p class="skop-eyebrow">{{ card_code | escape }}</p>
+  <h3 class="skop-formula-card__title">
+    {%- if card_url != blank -%}
+      <a href="{{ card_url }}">{{ card_title | escape }}</a>
+    {%- else -%}
+      {{ card_title | escape }}
+    {%- endif -%}
+  </h3>
+  <p class="skop-formula-card__activities">{{ card_activities | escape }}</p>
+  <span class="skop-formula-card__action" aria-hidden="true">Explore formula →</span>
+</article>

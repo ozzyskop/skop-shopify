@@ -1,0 +1,242 @@
+<section class="skop-formulas skop-section">
+  <div class="page-width">
+    <div class="skop-formulas__header">
+      <div>
+        <p class="skop-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        <h2>{{ section.settings.heading | escape }}</h2>
+      </div>
+      <div class="rte">{{ section.settings.body }}</div>
+    </div>
+
+    <div class="skop-formulas__grid">
+      {%- for block in section.blocks -%}
+        <div {{ block.shopify_attributes }}>
+          {% render 'skop-formula-card',
+            product: block.settings.product,
+            code: block.settings.code,
+            title: block.settings.title,
+            activities: block.settings.activities,
+            accent: block.settings.accent,
+            link_url: section.settings.finder_link
+          %}
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.finder_label != blank -%}
+      <div class="skop-formulas__footer">
+        <a class="button button--secondary" href="{{ section.settings.finder_link }}">
+          {{ section.settings.finder_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .skop-formulas {
+    background: var(--skop-white);
+  }
+
+  .skop-formulas__header {
+    align-items: end;
+    display: grid;
+    gap: 3rem;
+    grid-template-columns: minmax(0, 1.2fr) minmax(26rem, 0.8fr);
+    margin-bottom: clamp(4rem, 7vw, 7rem);
+  }
+
+  .skop-formulas__header h2 {
+    font-size: clamp(4rem, 6vw, 7.5rem);
+    letter-spacing: -0.05em;
+    line-height: 0.96;
+    margin: 1.5rem 0 0;
+  }
+
+  .skop-formulas__header .rte {
+    color: var(--skop-text-muted);
+    font-size: 1.7rem;
+  }
+
+  .skop-formulas__grid {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .skop-formulas__grid > div {
+    grid-column: span 2;
+  }
+
+  .skop-formulas__grid > div:nth-child(4),
+  .skop-formulas__grid > div:nth-child(5) {
+    grid-column: span 3;
+  }
+
+  .skop-formula-card {
+    background: var(--skop-mineral);
+    border: 1px solid var(--skop-border);
+    border-radius: var(--skop-radius-lg);
+    display: flex;
+    flex-direction: column;
+    min-height: 31rem;
+    overflow: hidden;
+    padding: clamp(2.4rem, 4vw, 4rem);
+    position: relative;
+  }
+
+  .skop-formula-card__signal {
+    background: var(--formula-accent);
+    height: 0.8rem;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .skop-formula-card .skop-eyebrow {
+    color: var(--skop-graphite);
+    opacity: 0.58;
+  }
+
+  .skop-formula-card__title {
+    font-size: clamp(2.5rem, 3vw, 4rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    margin: auto 0 1.5rem;
+  }
+
+  .skop-formula-card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .skop-formula-card__title a::after {
+    content: '';
+    inset: 0;
+    position: absolute;
+  }
+
+  .skop-formula-card__activities {
+    color: var(--skop-text-muted);
+    margin: 0;
+    max-width: 34rem;
+  }
+
+  .skop-formula-card__action {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-top: 2.5rem;
+    text-transform: uppercase;
+  }
+
+  .skop-formulas__footer {
+    margin-top: 4rem;
+    text-align: center;
+  }
+
+  @media screen and (max-width: 749px) {
+    .skop-formulas__header {
+      grid-template-columns: 1fr;
+    }
+
+    .skop-formulas__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .skop-formulas__grid > div,
+    .skop-formulas__grid > div:nth-child(4),
+    .skop-formulas__grid > div:nth-child(5) {
+      grid-column: auto;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SKOP formula families",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "The formulation system"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Built around how you use your hands."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Five distinct formula families organize SKOP around equipment, movement, contact, and activity context.</p>"
+    },
+    {
+      "type": "text",
+      "id": "finder_label",
+      "label": "Formula finder label",
+      "default": "Find your formula"
+    },
+    {
+      "type": "url",
+      "id": "finder_link",
+      "label": "Formula finder link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "formula",
+      "name": "Formula family",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Published product"
+        },
+        {
+          "type": "text",
+          "id": "code",
+          "label": "Formula code",
+          "default": "F01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Family title",
+          "default": "Shooting"
+        },
+        {
+          "type": "text",
+          "id": "activities",
+          "label": "Activities",
+          "default": "Shooting"
+        },
+        {
+          "type": "color",
+          "id": "accent",
+          "label": "Accent",
+          "default": "#FFB347"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SKOP formula families",
+      "blocks": [
+        { "type": "formula" },
+        { "type": "formula" },
+        { "type": "formula" },
+        { "type": "formula" },
+        { "type": "formula" }
+      ]
+    }
+  ]
+}
+{% endschema %}

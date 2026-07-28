@@ -1,0 +1,102 @@
+<section class="skop-proof-bar">
+  <div class="page-width skop-proof-bar__grid">
+    {%- for block in section.blocks -%}
+      <div {{ block.shopify_attributes }}>
+        {% render 'skop-proof-item', label: block.settings.label, detail: block.settings.detail %}
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% stylesheet %}
+  .skop-proof-bar {
+    background: var(--skop-mineral);
+    border-bottom: 1px solid var(--skop-border);
+  }
+
+  .skop-proof-bar__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .skop-proof-bar__grid > div {
+    border-inline-end: 1px solid var(--skop-border);
+    padding: 2.4rem clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .skop-proof-bar__grid > div:first-child {
+    border-inline-start: 1px solid var(--skop-border);
+  }
+
+  .skop-proof-item {
+    align-items: flex-start;
+    display: flex;
+    gap: 1.2rem;
+  }
+
+  .skop-proof-item__marker {
+    background: var(--skop-mint);
+    border-radius: 50%;
+    flex: 0 0 auto;
+    height: 0.9rem;
+    margin-top: 0.6rem;
+    width: 0.9rem;
+  }
+
+  .skop-proof-item strong,
+  .skop-proof-item span {
+    display: block;
+  }
+
+  .skop-proof-item strong {
+    font-size: 1.3rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .skop-proof-item div > span {
+    color: var(--skop-text-muted);
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    .skop-proof-bar__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SKOP proof bar",
+  "tag": "section",
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "proof",
+      "name": "Proof item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Five formulations"
+        },
+        {
+          "type": "text",
+          "id": "detail",
+          "label": "Detail",
+          "default": "Mapped to activity"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "SKOP proof bar",
+      "blocks": [{ "type": "proof" }, { "type": "proof" }, { "type": "proof" }, { "type": "proof" }]
+    }
+  ]
+}
+{% endschema %}
