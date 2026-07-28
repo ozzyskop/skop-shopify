@@ -1,0 +1,23 @@
+{
+  "formulas": {
+    "F01": { "title": "Shooting", "handle": "skop-f01-shooting" },
+    "F02": { "title": "Racket", "handle": "skop-f02-racket" },
+    "F03": { "title": "Vertical + Strength", "handle": "skop-f03-vertical-strength" },
+    "F04": { "title": "Pole", "handle": "skop-f04-pole" },
+    "F05": { "title": "Drumming + Gaming", "handle": "skop-f05-focus-control" }
+  },
+  "activities": {
+    "shooting": "F01",
+    "racket": "F02",
+    "climbing": "F03",
+    "crossfit": "F03",
+    "weightlifting": "F03",
+    "ninja": "F03",
+    "pole": "F04",
+    "drumming": "F05",
+    "gaming": "F05"
+  },
+  "intervalWeeks": { "short": 8, "medium": 6, "long": 4 },
+  "applicationProfile": { "light": "light", "moderate": "moderate", "heavy": "heavy" },
+  "packRecommendation": { "short": "single", "medium": "two_pack", "long": "three_pack" }
+}

@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "skop-formula-finder",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

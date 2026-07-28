@@ -1,0 +1,166 @@
+<script src="{{ 'skop-formula-finder.js' | asset_url }}" type="module"></script>
+
+<section class="skop-finder skop-section">
+  <div class="page-width page-width--narrow">
+    <p class="skop-eyebrow">Formula finder</p>
+    <h1>{{ section.settings.heading }}</h1>
+    <p>{{ section.settings.intro }}</p>
+
+    <form
+      class="skop-finder__form"
+      data-formula-finder
+      data-rules-url="{{ 'skop-formula-rules.json' | asset_url }}"
+    >
+      <fieldset data-step="activity">
+        <legend>What activity are you preparing for?</legend>
+        <label><input type="radio" name="activity" value="shooting"> Shooting</label>
+        <label><input type="radio" name="activity" value="racket"> Racket sports</label>
+        <label><input type="radio" name="activity" value="climbing"> Climbing</label>
+        <label><input type="radio" name="activity" value="crossfit"> CrossFit</label>
+        <label><input type="radio" name="activity" value="weightlifting"> Weightlifting</label>
+        <label><input type="radio" name="activity" value="ninja"> Ninja</label>
+        <label><input type="radio" name="activity" value="pole"> Pole</label>
+        <label><input type="radio" name="activity" value="drumming"> Drumming</label>
+        <label><input type="radio" name="activity" value="gaming"> Gaming</label>
+      </fieldset>
+
+      <fieldset data-step="perspiration">
+        <legend>How much do your hands perspire during a session?</legend>
+        <label><input type="radio" name="perspiration" value="light"> Light perspiration</label>
+        <label><input type="radio" name="perspiration" value="moderate"> Moderate perspiration</label>
+        <label><input type="radio" name="perspiration" value="heavy"> Heavy perspiration</label>
+      </fieldset>
+
+      <fieldset data-step="grip">
+        <legend>What grip feel do you prefer?</legend>
+        <label><input type="radio" name="gripPreference" value="controlled"> Controlled grip</label>
+        <label><input type="radio" name="gripPreference" value="strong"> Strong grip</label>
+        <label><input type="radio" name="gripPreference" value="natural"> Natural feel</label>
+      </fieldset>
+
+      <fieldset data-step="session">
+        <legend>How long is a typical session?</legend>
+        <label><input type="radio" name="session" value="short"> Short session</label>
+        <label><input type="radio" name="session" value="medium"> Medium session</label>
+        <label><input type="radio" name="session" value="long"> Long session</label>
+      </fieldset>
+
+      <fieldset data-step="equipment">
+        <legend>How important is minimizing equipment residue?</legend>
+        <label><input type="radio" name="equipmentPriority" value="low_residue"> Minimize residue</label>
+        <label><input type="radio" name="equipmentPriority" value="balanced"> Balanced priority</label>
+      </fieldset>
+
+      <fieldset data-step="skin">
+        <legend>Which skin-contact priority matters most?</legend>
+        <label><input type="radio" name="skinPriority" value="gentle"> Gentle skin contact</label>
+        <label><input type="radio" name="skinPriority" value="performance"> Performance priority</label>
+      </fieldset>
+
+      <div class="skop-finder__actions">
+        <button class="button" type="button" data-next-step>Next</button>
+        <button class="button" type="submit" data-see-formula hidden>See my formula</button>
+      </div>
+      <div class="skop-finder__result" role="status" aria-live="polite" data-formula-result></div>
+      <noscript>
+        <p>Choose your primary activity, then use the formula guide below or contact SKOP for help.</p>
+      </noscript>
+    </form>
+  </div>
+</section>
+
+{% stylesheet %}
+  .skop-finder {
+    min-height: 70vh;
+  }
+
+  .skop-finder h1 {
+    font-size: clamp(4rem, 8vw, 8rem);
+    line-height: 0.95;
+  }
+
+  .skop-finder__form {
+    background: var(--skop-mineral);
+    border-radius: var(--skop-radius-lg);
+    margin-block-start: 4rem;
+    padding: clamp(2rem, 5vw, 5rem);
+  }
+
+  .skop-finder fieldset {
+    border: 0;
+    display: grid;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .skop-finder fieldset[hidden] {
+    display: none;
+  }
+
+  .skop-finder legend {
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    font-weight: 750;
+    margin-block-end: 2rem;
+  }
+
+  .skop-finder label {
+    align-items: center;
+    background: #fff;
+    border: 0.1rem solid rgb(var(--color-foreground), 0.15);
+    border-radius: var(--skop-radius-md);
+    cursor: pointer;
+    display: flex;
+    gap: 1rem;
+    padding: 1.4rem;
+  }
+
+  .skop-finder input {
+    accent-color: var(--skop-mint);
+  }
+
+  .skop-finder__actions {
+    margin-block-start: 2.5rem;
+  }
+
+  .skop-finder__result {
+    display: grid;
+    gap: 1rem;
+    margin-block-start: 2.5rem;
+  }
+
+  .skop-finder__result strong {
+    font-size: 2.4rem;
+  }
+
+  .skop-finder__result .button {
+    justify-self: start;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SKOP formula finder",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find your formula"
+    },
+    {
+      "type": "textarea",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "Start with your activity. Your answers tailor the explanation without substituting a different sport-specific formulation."
+    }
+  ],
+  "presets": [
+    {
+      "name": "SKOP formula finder"
+    }
+  ]
+}
+{% endschema %}
