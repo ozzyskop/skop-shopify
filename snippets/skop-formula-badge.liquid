@@ -1,0 +1,22 @@
+{% doc %}
+  Renders the product formulation identifier and family.
+
+  @param {product} product - The current SKOP product.
+{% enddoc %}
+
+{%- liquid
+  assign formula_code = product.metafields.skop.formula_code.value
+  assign formula_family = product.metafields.skop.formula_family.value
+  assign accent = product.metafields.skop.accent_color.value | default: '#50F0BD'
+-%}
+
+{%- if formula_code != blank or formula_family != blank -%}
+  <p class="skop-formula-badge" style="--formula-accent: {{ accent }};">
+    {%- if formula_code != blank -%}
+      <span class="skop-formula-badge__code">{{ formula_code | escape }}</span>
+    {%- endif -%}
+    {%- if formula_family != blank -%}
+      <span>{{ formula_family | escape }}</span>
+    {%- endif -%}
+  </p>
+{%- endif -%}

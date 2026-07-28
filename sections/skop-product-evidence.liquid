@@ -1,0 +1,91 @@
+{%- liquid
+  assign ingredients = product.metafields.skop.ingredients.value
+  assign warnings = product.metafields.skop.warnings.value
+  assign drying_time = product.metafields.skop.drying_time.value
+  assign application_amount = product.metafields.skop.application_amount.value
+-%}
+
+<section class="skop-product-details skop-section">
+  <div class="page-width">
+    <p class="skop-eyebrow">Product detail</p>
+    <div class="skop-product-details__grid">
+      <article>
+        <h2>How to apply</h2>
+        {%- if application_amount != blank -%}
+          <p>{{ application_amount | escape }}</p>
+        {%- else -%}
+          <p>Approved application instructions are being finalized.</p>
+        {%- endif -%}
+        {%- if drying_time != blank -%}
+          <p><strong>Drying time:</strong> {{ drying_time | escape }}</p>
+        {%- endif -%}
+      </article>
+      <article>
+        <h2>Ingredients</h2>
+        {%- if ingredients != blank -%}
+          <p>{{ ingredients | escape }}</p>
+        {%- else -%}
+          <p>The verified ingredient list will appear here before this product is released.</p>
+        {%- endif -%}
+      </article>
+      <article>
+        <h2>Safety</h2>
+        {%- if warnings != blank -%}
+          <p>{{ warnings | escape }}</p>
+        {%- else -%}
+          <p>Label warnings and safety documentation are pending final approval.</p>
+        {%- endif -%}
+      </article>
+      <article>
+        <h2>Results</h2>
+        <p>Evidence is displayed only after its source, method, formulation, and approved wording are documented.</p>
+      </article>
+      <article>
+        <h2>Reviews</h2>
+        <p>Verified customer reviews will appear here after launch testing.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .skop-product-details {
+    background: var(--skop-graphite);
+    color: var(--skop-mineral);
+  }
+
+  .skop-product-details__grid {
+    display: grid;
+    gap: 1.6rem;
+  }
+
+  .skop-product-details__grid article {
+    border-block-start: 0.1rem solid rgb(255 255 255 / 20%);
+    padding-block: 2rem;
+  }
+
+  .skop-product-details__grid h2 {
+    color: inherit;
+    margin-block-start: 0;
+  }
+
+  @media screen and (min-width: 750px) {
+    .skop-product-details__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SKOP product details",
+  "tag": "section",
+  "class": "section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "SKOP product details"
+    }
+  ]
+}
+{% endschema %}

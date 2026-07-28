@@ -1,0 +1,183 @@
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign accent = product.metafields.skop.accent_color.value | default: '#50F0BD'
+  assign activities = product.metafields.skop.supported_activities.value
+-%}
+
+<section class="skop-product skop-section" style="--formula-accent: {{ accent }};">
+  <div class="page-width skop-product__layout">
+    <div class="skop-product__media" aria-label="{{ product.title | escape }} media">
+      {%- if product.featured_media != blank -%}
+        {{
+          product.featured_media
+          | image_url: width: 1400
+          | image_tag:
+            widths: '360, 540, 720, 960, 1200, 1400',
+            sizes: '(min-width: 990px) 50vw, 100vw',
+            loading: 'eager',
+            fetchpriority: 'high',
+            alt: product.featured_media.alt
+        }}
+      {%- else -%}
+        <div class="skop-product__media-placeholder">
+          {{ 'skop-mark.svg' | inline_asset_content }}
+          <span>Product photography pending</span>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="skop-product__info">
+      {% render 'skop-formula-badge', product: product %}
+      <h1>{{ product.title | escape }}</h1>
+      <p class="skop-product__size">50 ml performance gel</p>
+      {%- if activities != blank -%}
+        <p><strong>Designed for:</strong> {{ activities | join: ', ' | escape }}</p>
+      {%- endif -%}
+      <div class="skop-product__price">
+        {%- if product.selected_or_first_available_variant.price > 0 -%}
+          {{ product.selected_or_first_available_variant.price | money }}
+        {%- else -%}
+          Pricing pending
+        {%- endif -%}
+      </div>
+      {% render 'skop-purchase-selector', product: product, section: section %}
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .skop-product__layout {
+    display: grid;
+    gap: clamp(3rem, 7vw, 8rem);
+  }
+
+  .skop-product__media {
+    background: color-mix(in srgb, var(--formula-accent) 10%, var(--skop-mineral));
+    border-radius: var(--skop-radius-lg);
+    min-height: 42rem;
+    overflow: hidden;
+  }
+
+  .skop-product__media img {
+    height: 100%;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .skop-product__media-placeholder {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+    justify-content: center;
+    min-height: 42rem;
+  }
+
+  .skop-product__media-placeholder svg {
+    color: var(--formula-accent);
+    max-width: 8rem;
+  }
+
+  .skop-product__info {
+    align-self: center;
+  }
+
+  .skop-product__info h1 {
+    font-size: clamp(3.6rem, 6vw, 7rem);
+    line-height: 0.95;
+    margin-block: 1.5rem;
+  }
+
+  .skop-formula-badge {
+    align-items: center;
+    display: flex;
+    font-size: 1.3rem;
+    font-weight: 750;
+    gap: 1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .skop-formula-badge__code {
+    background: var(--formula-accent);
+    border-radius: 999px;
+    color: var(--skop-graphite);
+    padding: 0.45rem 0.9rem;
+  }
+
+  .skop-product__size,
+  .skop-product__price {
+    font-size: 1.8rem;
+  }
+
+  .skop-product__price {
+    font-weight: 750;
+    margin-block: 2rem;
+  }
+
+  .skop-purchase-selector {
+    border-block-start: 0.1rem solid rgb(var(--color-foreground), 0.18);
+    padding-block-start: 2rem;
+  }
+
+  .skop-purchase-selector__default {
+    align-items: center;
+    border: 0.2rem solid var(--formula-accent);
+    border-radius: var(--skop-radius-md);
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+  }
+
+  .skop-purchase-selector__default span {
+    font-size: 1.2rem;
+  }
+
+  .skop-purchase-selector__subscriptions {
+    margin-block: 2rem;
+  }
+
+  .skop-purchase-selector__label {
+    font-weight: 750;
+    margin-block-end: 0;
+  }
+
+  .skop-product-form__quantity {
+    display: grid;
+    gap: 0.6rem;
+    margin-block: 2rem;
+    max-width: 12rem;
+  }
+
+  .skop-product-form__quantity input {
+    min-height: 4.8rem;
+    padding-inline: 1.2rem;
+  }
+
+  @media screen and (min-width: 750px) {
+    .skop-product__layout {
+      grid-template-columns: minmax(0, 1.05fr) minmax(32rem, 0.95fr);
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SKOP product",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "SKOP product"
+    }
+  ]
+}
+{% endschema %}

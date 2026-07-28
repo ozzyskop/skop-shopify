@@ -1,0 +1,71 @@
+{% doc %}
+  Renders the native Shopify product form and subscription app blocks.
+
+  One-time purchase is always the default because this snippet never supplies a
+  selling_plan value. An installed subscription app owns that input.
+
+  @param {product} product - The current product.
+  @param {section} section - The parent product section.
+{% enddoc %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+  assign can_purchase = false
+  if current_variant != blank and current_variant.available and current_variant.price > 0
+    assign can_purchase = true
+  endif
+-%}
+
+<div class="skop-purchase-selector" data-skop-purchase-selector>
+  <div class="skop-purchase-selector__default">
+    <strong>One-time purchase</strong>
+    <span>Selected by default</span>
+  </div>
+
+  {%- if product.metafields.skop.subscription_eligible.value -%}
+    <div class="skop-purchase-selector__subscriptions" data-subscription-app-block>
+      <p class="skop-purchase-selector__label">Subscribe and save</p>
+      <p class="caption">
+        Optional replenishment is available every 4, 6, or 8 weeks. Select a plan only if you want recurring delivery.
+      </p>
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          {% render block %}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+
+  {%- form 'product',
+    product,
+    id: 'skop-product-form',
+    class: 'skop-product-form',
+    novalidate: 'novalidate',
+    data-product-form: ''
+  -%}
+    <input type="hidden" name="id" value="{{ current_variant.id }}">
+    <div class="skop-product-form__quantity">
+      <label for="skop-quantity">Quantity</label>
+      <input id="skop-quantity" name="quantity" type="number" min="1" value="1">
+    </div>
+    <button
+      class="button button--full-width"
+      type="submit"
+      {% unless can_purchase %}
+        disabled
+      {% endunless %}
+    >
+      {%- if current_variant == blank or current_variant.available == false -%}
+        Sold out
+      {%- elsif current_variant.price == 0 -%}
+        Pricing pending
+      {%- else -%}
+        Add to cart
+      {%- endif -%}
+    </button>
+  {%- endform -%}
+
+  <p class="caption">
+    Shipping timing, subscription savings, and cancellation terms will be shown here after final commerce approval.
+  </p>
+</div>
