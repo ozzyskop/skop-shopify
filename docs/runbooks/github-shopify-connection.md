@@ -6,7 +6,7 @@ Connect the SKOP theme to Shopify through Shopify's native GitHub integration. T
 
 ## Known values
 
-- GitHub repository: `https://github.com/eladrave/skop-shopify`
+- GitHub repository: `https://github.com/ozzyskop/skop-shopify`
 - Shopify store hostname: `mvjhef-9f.myshopify.com`
 - Shopify-connected branch: `main`
 
@@ -30,9 +30,9 @@ This is the standard directory structure required by Shopify's GitHub theme inte
 2. Open **Shopify Admin > Online Store > Themes**.
 3. In **Theme library**, select **Add theme > Connect from GitHub**.
 4. Install or authorize the official Shopify GitHub app when prompted.
-5. For GitHub repository access, choose **Only select repositories** and allow `eladrave/skop-shopify`.
+5. For GitHub repository access, choose **Only select repositories** and allow `ozzyskop/skop-shopify`.
 6. Return to Shopify and select:
-   - Account: `eladrave`
+   - Account: `ozzyskop`
    - Repository: `skop-shopify`
    - Branch: `main`
 7. Connect the branch.

@@ -2,7 +2,7 @@
 
 **Handoff date:** July 26, 2026
 
-**Repository:** `https://github.com/eladrave/skop-shopify`
+**Repository:** `https://github.com/ozzyskop/skop-shopify`
 
 **Store:** `mvjhef-9f.myshopify.com`
 
