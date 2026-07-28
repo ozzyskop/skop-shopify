@@ -1,0 +1,39 @@
+namespace: skop
+product_metafields:
+  - { key: formula_code, type: single_line_text_field, required: true }
+  - { key: formula_family, type: single_line_text_field, required: true }
+  - { key: accent_color, type: color, required: true }
+  - { key: supported_activities, type: list.single_line_text_field, required: true }
+  - { key: perspiration_profile, type: multi_line_text_field, required: true }
+  - { key: grip_profile, type: multi_line_text_field, required: true }
+  - { key: drying_time, type: single_line_text_field, required: true }
+  - { key: session_duration, type: single_line_text_field, required: true }
+  - { key: application_amount, type: multi_line_text_field, required: true }
+  - { key: ingredients, type: multi_line_text_field, required: true }
+  - { key: warnings, type: multi_line_text_field, required: true }
+  - { key: supplier_sku, type: single_line_text_field, required: true }
+  - { key: subscription_eligible, type: boolean, required: true }
+  - { key: bundle_type, type: single_line_text_field, required: true }
+metaobjects:
+  - handle: laboratory_result
+    fields:
+      - { key: title, type: single_line_text_field, required: true }
+      - { key: summary, type: multi_line_text_field, required: true }
+      - { key: method, type: multi_line_text_field, required: true }
+      - { key: result_file, type: file_reference, required: true }
+  - handle: safety_document
+    fields:
+      - { key: title, type: single_line_text_field, required: true }
+      - { key: jurisdiction, type: single_line_text_field, required: true }
+      - { key: document, type: file_reference, required: true }
+  - handle: endorsement
+    fields:
+      - { key: name, type: single_line_text_field, required: true }
+      - { key: discipline, type: single_line_text_field, required: true }
+      - { key: quote, type: multi_line_text_field, required: true }
+      - { key: permission_record, type: file_reference, required: true }
+  - handle: formula_rule
+    fields:
+      - { key: activity, type: single_line_text_field, required: true }
+      - { key: formula_code, type: single_line_text_field, required: true }
+      - { key: explanation, type: multi_line_text_field, required: true }
