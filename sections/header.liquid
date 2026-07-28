@@ -172,7 +172,14 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <img
+            class="skop-wordmark"
+            src="{{ 'skop-wordmark.svg' | asset_url }}"
+            width="178"
+            height="48"
+            alt="{{ shop.name | escape }}"
+          >
+          <span class="visually-hidden">{{ shop.name }}</span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -215,7 +222,14 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          <img
+            class="skop-wordmark"
+            src="{{ 'skop-wordmark.svg' | asset_url }}"
+            width="178"
+            height="48"
+            alt="{{ shop.name | escape }}"
+          >
+          <span class="visually-hidden">{{ shop.name }}</span>
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}

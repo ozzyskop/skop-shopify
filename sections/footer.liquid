@@ -121,6 +121,15 @@
                               width: settings.brand_image_width
                           }}
                         </div>
+                      {%- else -%}
+                        <img
+                          class="skop-wordmark"
+                          src="{{ 'skop-wordmark.svg' | asset_url }}"
+                          width="178"
+                          height="48"
+                          alt="{{ shop.name | escape }}"
+                          loading="lazy"
+                        >
                       {%- endif -%}
                       {%- if settings.brand_headline != blank -%}
                         <h2 class="footer-block__heading rte">{{ settings.brand_headline }}</h2>

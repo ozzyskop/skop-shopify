@@ -34,6 +34,41 @@
     ]
   },
   {
+    "name": "SKOP formulation colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "skop_shooting_color",
+        "label": "Shooting",
+        "default": "#FFB347"
+      },
+      {
+        "type": "color",
+        "id": "skop_racket_color",
+        "label": "Racket sports",
+        "default": "#B9EB48"
+      },
+      {
+        "type": "color",
+        "id": "skop_vertical_color",
+        "label": "Climbing and strength",
+        "default": "#4BD8EA"
+      },
+      {
+        "type": "color",
+        "id": "skop_pole_color",
+        "label": "Pole dancing",
+        "default": "#FF5CA8"
+      },
+      {
+        "type": "color",
+        "id": "skop_gaming_color",
+        "label": "Drumming and gaming",
+        "default": "#9271FF"
+      }
+    ]
+  },
+  {
     "name": "t:settings_schema.colors.name",
     "settings": [
       {

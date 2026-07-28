@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 356 96" role="img" aria-labelledby="title">
+  <title id="title">SKOP</title>
+  <path fill="currentColor" d="M10 16h68v16H28v16h42l12 12v20H10V64h54V48H22L10 36V16Zm88 0h18v25l25-25h24l-33 32 35 32h-25l-26-25v25H98V16Zm82 12 12-12h48l12 12v40l-12 12h-48l-12-12V28Zm18 4v32h36V32h-36Zm72-16h60l16 16v22l-16 16h-42v10h-18V16Zm18 16v22h34l6-6V38l-6-6h-34Z"/>
+  <circle cx="346" cy="76" r="8" fill="#50f0bd"/>
+</svg>

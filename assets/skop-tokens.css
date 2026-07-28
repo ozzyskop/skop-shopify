@@ -1,0 +1,19 @@
+:root {
+  --skop-graphite: #0d1214;
+  --skop-graphite-soft: #182326;
+  --skop-mineral: #f2f5f3;
+  --skop-white: #ffffff;
+  --skop-mint: #50f0bd;
+  --skop-shooting: #ffb347;
+  --skop-racket: #b9eb48;
+  --skop-vertical: #4bd8ea;
+  --skop-pole: #ff5ca8;
+  --skop-focus: #9271ff;
+  --skop-text-muted: #68756f;
+  --skop-border: #d6ddda;
+  --skop-radius-sm: 0.25rem;
+  --skop-radius-md: 0.625rem;
+  --skop-radius-lg: 1.25rem;
+  --skop-space-section: clamp(3rem, 7vw, 7rem);
+  --skop-focus-ring: 0 0 0 3px var(--skop-white), 0 0 0 6px var(--skop-mint);
+}
