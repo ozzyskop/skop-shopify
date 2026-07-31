@@ -59,3 +59,14 @@ The original implementation workspace could reach the store hostname but could n
 - Complete the owner-confirmed paid-plan purchase gate before any plan purchase.
 - Capture `SKOP_PREVIEW_URL` only from the active owner-authorized Shopify CLI development session; keep it out of source control if it contains credential-bearing query material.
 - Verify a current owner recovery method before launch without recording recovery secrets in this repository.
+
+## Wholesale access controls
+
+- The public wholesale page explains eligibility and accepts applications but never exposes wholesale pricing.
+- New applicants are reviewed manually before receiving the `wholesale_approved` customer tag or access to an assigned catalog.
+- Sensitive resale and tax documents are requested only through an approved secure follow-up channel, never through the theme contact form or repository.
+- Anonymous visitors, ordinary customer accounts, and accounts tagged only `wholesale_applicant` must not see wholesale prices or add wholesale-only case packs to cart.
+- Approved accounts receive only their assigned catalog, documented minimum order, and eligible case-pack products.
+- Wholesale pricing, case quantities, payment terms, and tax treatment remain pending owner and professional approval.
+
+Before launch, test one anonymous visitor, one ordinary customer, one pending applicant, one approved account, and one declined account. Record whether pricing visibility, catalog access, cart authorization, customer tags, notifications, and checkout behavior match the approved state.

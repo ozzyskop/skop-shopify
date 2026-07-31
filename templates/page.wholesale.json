@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "skop-wholesale-application",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

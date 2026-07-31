@@ -513,6 +513,43 @@
       "expired": "Expired"
     }
   },
+  "skop": {
+    "wholesale": {
+      "eyebrow": "SKOP for business",
+      "heading": "Performance supply, built for your community.",
+      "intro": "Wholesale access is designed for qualified retailers, ranges, gyms, studios, teams, and training facilities in the United States and Canada.",
+      "pricing_notice": "Wholesale prices, case quantities, minimum orders, shipping terms, and product availability are provided only after account approval.",
+      "process_label": "Wholesale application process",
+      "apply_heading": "Apply",
+      "apply_body": "Tell us about your business, customers, and expected order volume.",
+      "review_heading": "Review",
+      "review_body": "We review each application and may request resale or tax documentation.",
+      "order_heading": "Order",
+      "order_body": "Approved accounts receive authenticated access to eligible case packs and assigned pricing.",
+      "account_status": "Account status",
+      "approved_heading": "Wholesale account approved",
+      "approved_body": "Your assigned catalog and approved business pricing will appear when the case-pack catalog is activated.",
+      "pending_heading": "Application under review",
+      "pending_body": "We have your application. Wholesale pricing remains hidden until your account is approved.",
+      "application_eyebrow": "Wholesale application",
+      "application_heading": "Tell us about your business.",
+      "application_intro": "Complete the application below. Submission does not guarantee approval or establish final pricing or terms.",
+      "documentation_note": "Resale certificates, tax documents, and other sensitive records will be requested through a secure follow-up process. Do not submit them in this form.",
+      "success": "Thank you. Your wholesale application has been received for review.",
+      "business_name": "Business name",
+      "buyer_name": "Buyer name",
+      "business_email": "Business email",
+      "phone": "Phone",
+      "website": "Website (optional)",
+      "business_type": "Business type",
+      "shipping_country": "Shipping country",
+      "monthly_volume": "Expected monthly order volume",
+      "shipping_address": "Shipping address",
+      "audience": "Activities or customer segments served",
+      "terms_agreement": "I confirm that the information is accurate and agree to review the wholesale terms before ordering.",
+      "submit": "Submit wholesale application"
+    }
+  },
   "recipient": {
     "form": {
       "checkbox": "I want to send this as a gift",

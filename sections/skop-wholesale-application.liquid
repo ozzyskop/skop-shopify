@@ -1,0 +1,335 @@
+{%- liquid
+  assign wholesale_approved = false
+  assign wholesale_applicant = false
+  if customer
+    if customer.tags contains 'wholesale_approved'
+      assign wholesale_approved = true
+    endif
+    if customer.tags contains 'wholesale_applicant'
+      assign wholesale_applicant = true
+    endif
+  endif
+-%}
+
+<section class="skop-b2b skop-section">
+  <div class="page-width">
+    <div class="skop-b2b__hero">
+      <div>
+        <p class="skop-eyebrow">{{ 'skop.wholesale.eyebrow' | t }}</p>
+        <h1>{{ 'skop.wholesale.heading' | t }}</h1>
+      </div>
+      <div class="skop-b2b__intro">
+        <p>{{ 'skop.wholesale.intro' | t }}</p>
+        <p class="skop-b2b__notice">{{ 'skop.wholesale.pricing_notice' | t }}</p>
+      </div>
+    </div>
+
+    <div class="skop-b2b__steps" aria-label="{{ 'skop.wholesale.process_label' | t }}">
+      <article>
+        <span>01</span>
+        <h2>{{ 'skop.wholesale.apply_heading' | t }}</h2>
+        <p>{{ 'skop.wholesale.apply_body' | t }}</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h2>{{ 'skop.wholesale.review_heading' | t }}</h2>
+        <p>{{ 'skop.wholesale.review_body' | t }}</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h2>{{ 'skop.wholesale.order_heading' | t }}</h2>
+        <p>{{ 'skop.wholesale.order_body' | t }}</p>
+      </article>
+    </div>
+
+    {%- if wholesale_approved -%}
+      <div class="skop-b2b__status skop-b2b__status--approved">
+        <p class="skop-eyebrow">{{ 'skop.wholesale.account_status' | t }}</p>
+        <h2>{{ 'skop.wholesale.approved_heading' | t }}</h2>
+        <p>{{ 'skop.wholesale.approved_body' | t }}</p>
+      </div>
+    {%- elsif wholesale_applicant -%}
+      <div class="skop-b2b__status">
+        <p class="skop-eyebrow">{{ 'skop.wholesale.account_status' | t }}</p>
+        <h2>{{ 'skop.wholesale.pending_heading' | t }}</h2>
+        <p>{{ 'skop.wholesale.pending_body' | t }}</p>
+      </div>
+    {%- endif -%}
+
+    <div class="skop-b2b__application">
+      <div>
+        <p class="skop-eyebrow">{{ 'skop.wholesale.application_eyebrow' | t }}</p>
+        <h2>{{ 'skop.wholesale.application_heading' | t }}</h2>
+        <p>{{ 'skop.wholesale.application_intro' | t }}</p>
+        <p>{{ 'skop.wholesale.documentation_note' | t }}</p>
+      </div>
+
+      <div class="skop-b2b__form">
+        {%- assign has_app_block = false -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}
+            {%- assign has_app_block = true -%}
+            <div {{ block.shopify_attributes }}>
+              {% render block %}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- unless has_app_block -%}
+          {%- form 'contact', id: 'SkopWholesaleApplication' -%}
+            {%- if form.posted_successfully? -%}
+              <p class="form-status form-status-list form__message" tabindex="-1" autofocus>
+                {{ 'skop.wholesale.success' | t }}
+              </p>
+            {%- endif -%}
+            {{ form.errors | default_errors }}
+
+            <div class="skop-b2b__field-grid">
+              <div class="field">
+                <input
+                  class="field__input"
+                  id="WholesaleBusinessName"
+                  name="contact[Business name]"
+                  type="text"
+                  required
+                >
+                <label class="field__label" for="WholesaleBusinessName">{{ 'skop.wholesale.business_name' | t }}</label>
+              </div>
+              <div class="field">
+                <input class="field__input" id="WholesaleBuyerName" name="contact[Buyer name]" type="text" required>
+                <label class="field__label" for="WholesaleBuyerName">{{ 'skop.wholesale.buyer_name' | t }}</label>
+              </div>
+              <div class="field">
+                <input
+                  class="field__input"
+                  id="WholesaleEmail"
+                  name="contact[email]"
+                  type="email"
+                  autocomplete="email"
+                  required
+                >
+                <label class="field__label" for="WholesaleEmail">{{ 'skop.wholesale.business_email' | t }}</label>
+              </div>
+              <div class="field">
+                <input
+                  class="field__input"
+                  id="WholesalePhone"
+                  name="contact[Phone]"
+                  type="tel"
+                  autocomplete="tel"
+                  required
+                >
+                <label class="field__label" for="WholesalePhone">{{ 'skop.wholesale.phone' | t }}</label>
+              </div>
+              <div class="field">
+                <input class="field__input" id="WholesaleWebsite" name="contact[Website]" type="url">
+                <label class="field__label" for="WholesaleWebsite">{{ 'skop.wholesale.website' | t }}</label>
+              </div>
+              <div class="field">
+                <input
+                  class="field__input"
+                  id="WholesaleBusinessType"
+                  name="contact[Business type]"
+                  type="text"
+                  required
+                >
+                <label class="field__label" for="WholesaleBusinessType">{{ 'skop.wholesale.business_type' | t }}</label>
+              </div>
+              <div class="field">
+                <input class="field__input" id="WholesaleCountry" name="contact[Shipping country]" type="text" required>
+                <label class="field__label" for="WholesaleCountry">{{ 'skop.wholesale.shipping_country' | t }}</label>
+              </div>
+              <div class="field">
+                <input
+                  class="field__input"
+                  id="WholesaleVolume"
+                  name="contact[Expected monthly volume]"
+                  type="text"
+                  required
+                >
+                <label class="field__label" for="WholesaleVolume">{{ 'skop.wholesale.monthly_volume' | t }}</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <textarea
+                class="text-area field__input"
+                id="WholesaleAddress"
+                name="contact[Shipping address]"
+                rows="4"
+                required
+              ></textarea>
+              <label class="field__label" for="WholesaleAddress">{{ 'skop.wholesale.shipping_address' | t }}</label>
+            </div>
+            <div class="field">
+              <textarea
+                class="text-area field__input"
+                id="WholesaleAudience"
+                name="contact[Activities and customer segments]"
+                rows="4"
+                required
+              ></textarea>
+              <label class="field__label" for="WholesaleAudience">{{ 'skop.wholesale.audience' | t }}</label>
+            </div>
+            <label class="skop-b2b__consent" for="WholesaleTerms">
+              <input id="WholesaleTerms" name="contact[Wholesale terms accepted]" type="checkbox" value="Yes" required>
+              <span>{{ 'skop.wholesale.terms_agreement' | t }}</span>
+            </label>
+            <button class="button" type="submit">{{ 'skop.wholesale.submit' | t }}</button>
+          {%- endform -%}
+        {%- endunless -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .skop-b2b {
+    background: var(--skop-mineral);
+  }
+
+  .skop-b2b__hero,
+  .skop-b2b__application {
+    display: grid;
+    gap: clamp(3rem, 7vw, 8rem);
+  }
+
+  .skop-b2b h1 {
+    font-size: clamp(5rem, 11vw, 12rem);
+    letter-spacing: -0.07em;
+    line-height: 0.86;
+    margin-block: 1.5rem 0;
+    max-width: 8ch;
+  }
+
+  .skop-b2b__intro {
+    align-self: end;
+    font-size: 1.8rem;
+    max-width: 52rem;
+  }
+
+  .skop-b2b__notice {
+    border-inline-start: 0.3rem solid var(--skop-mint);
+    color: var(--skop-text-muted);
+    padding-inline-start: 1.6rem;
+  }
+
+  .skop-b2b__steps {
+    display: grid;
+    gap: 1.6rem;
+    margin-block: clamp(5rem, 9vw, 10rem);
+  }
+
+  .skop-b2b__steps article {
+    background: var(--skop-white);
+    border-radius: var(--skop-radius-lg);
+    padding: 2.4rem;
+  }
+
+  .skop-b2b__steps span {
+    color: var(--skop-text-muted);
+    font-size: 1.2rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+  }
+
+  .skop-b2b__status {
+    background: var(--skop-graphite-soft);
+    border-radius: var(--skop-radius-lg);
+    color: var(--skop-white);
+    margin-block-end: 3rem;
+    padding: clamp(2.4rem, 5vw, 5rem);
+  }
+
+  .skop-b2b__status--approved {
+    background: var(--skop-graphite);
+    border: 0.2rem solid var(--skop-mint);
+  }
+
+  .skop-b2b__status h2 {
+    color: inherit;
+  }
+
+  .skop-b2b__application {
+    background: var(--skop-graphite);
+    border-radius: var(--skop-radius-lg);
+    color: var(--skop-mineral);
+    padding: clamp(2.4rem, 6vw, 7rem);
+  }
+
+  .skop-b2b__application h2 {
+    color: inherit;
+    font-size: clamp(3.4rem, 6vw, 6.5rem);
+    letter-spacing: -0.05em;
+    line-height: 0.95;
+  }
+
+  .skop-b2b__form {
+    min-width: 0;
+  }
+
+  .skop-b2b__field-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .skop-b2b__form .field {
+    margin-block-end: 1.5rem;
+  }
+
+  .skop-b2b__form .field__input {
+    background: var(--skop-white);
+    color: var(--skop-graphite);
+  }
+
+  .skop-b2b__consent {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    margin-block: 2rem;
+  }
+
+  .skop-b2b__consent input {
+    margin-block-start: 0.4rem;
+  }
+
+  .skop-b2b__form .button {
+    background: var(--skop-mint);
+    color: var(--skop-graphite);
+    width: 100%;
+  }
+
+  @media screen and (min-width: 750px) {
+    .skop-b2b__hero,
+    .skop-b2b__application {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .skop-b2b__steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .skop-b2b__field-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "SKOP wholesale",
+  "tag": "section",
+  "class": "section",
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [],
+  "presets": [
+    {
+      "name": "SKOP wholesale"
+    }
+  ]
+}
+{% endschema %}
